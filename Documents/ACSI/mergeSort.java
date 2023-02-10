@@ -39,31 +39,32 @@ public class mergeSort{
 				rightFinger++;
 				i++;
 				
-			} else if (arr[rightFinger] > arr[leftFinger]) {
+			} else {
 				temp[i] = arr[leftFinger];
 				leftFinger++;
 				i++;
 			}
-			if(rightFinger==to){
-				for (int  v = leftFinger; v<mid; v++){
+		}
+		
+		if(rightFinger == to){
+			for (int  v = leftFinger; v < mid; v++){
 				temp[i] = arr[v];
 				i++;
-				}
 			}
-			if(leftFinger==mid){
-				for (int w = rightFinger; w<to; w++){
+		}
+		if(leftFinger==mid){
+			for (int w = rightFinger; w<to; w++){
 				temp[i] = arr[w];
 				i++;
-				}
 			}
-			
-			for (int j = 0; j < temp.length; j++) {
-				arr[j+from] = temp[j];
-			}
+		}
+		
+		for (int j = 0; j < temp.length; j++) {
+			arr[j+from] = temp[j];
 		}
 	}
 	public static void main(String[] arg){
-		int[] arr = {6,2,5,8};
+		int[] arr = {6,-2,5,8};
 		System.out.println(Arrays.toString(sort(arr)));
 	}
 }
