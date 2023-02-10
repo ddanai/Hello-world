@@ -30,10 +30,10 @@ public class mergeSort{
 		int leftFinger = from;
 		int rightFinger = mid;
 		int i = 0;
-		int[] temp = {};
+		int[] temp = new int[to - from];
 		
 		
-		while(from < mid && mid < to){
+		while(leftFinger < mid && rightFinger < to){
 			if (arr[leftFinger] > arr[rightFinger]) {
 				temp[i] = arr[rightFinger];
 				rightFinger++;
@@ -44,19 +44,26 @@ public class mergeSort{
 				leftFinger++;
 				i++;
 			}
+			if(rightFinger==to){
+				for (int  v = leftFinger; v<mid; v++){
+				temp[i] = arr[v];
+				i++;
+				}
+			}
+			if(leftFinger==mid){
+				for (int w = rightFinger; w<to; w++){
+				temp[i] = arr[w];
+				i++;
+				}
+			}
 			
-			
-			
+			for (int j = 0; j < temp.length; j++) {
+				arr[j+from] = temp[j];
+			}
 		}
-		
-		for (int i = 0; i<temp.length; i++;) {
-			arr[i+from] = temp[i];
-		}
-	
+	}
 	public static void main(String[] arg){
-		int[] arr = {6,2};
-		sort(arr);
-		Arrays.toString(int[] arr);
-		System.out.println(arr);
+		int[] arr = {6,2,5,8};
+		System.out.println(Arrays.toString(sort(arr)));
 	}
 }
