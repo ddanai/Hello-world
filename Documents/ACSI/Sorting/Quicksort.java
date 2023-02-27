@@ -2,14 +2,14 @@ import java.util.Arrays;
 
 public class Quicksort <T extends Comparable <T>> {
     
-    public static T[] sort(T[] arr) {
-        arr = Arrays.copyOf(arr, arr.length);
+    public static <T extends Comparable <T>> T[] sort(T[] arr) {
+        //arr = Arrays.copyOf(arr, arr.length);
         sort(arr, 0, arr.length);
         return arr;
     }
     
     /** Recursively sor the array */
-    private static void sort(T[] arr, int from, int to) {
+    private static <T extends Comparable <T>> void sort(T[] arr, int from, int to) {
         if (to - from < 2) return;
         
         T pivot = partition(arr, from, to);
@@ -22,15 +22,15 @@ public class Quicksort <T extends Comparable <T>> {
     * are located on the left of the array and all greater or equal are
     * on the right of the array. Return the location of the pivot.
     */
-    private static int partition(T[] arr, int from, int to) {
+    private static <T extends Comparable <T>> T[] partition(T[] arr, int from, int to) {
         int pivot = arr[from]; //Choose the first element as the pivot.
         int lf = from, rf = to;
         
         //Move all small elements to the left and large to the right.
         while (true) {
-            while (arr[++lf] < pivot) //Probe lf to the right.
+            while (less(arr, ++lf, pivot)) //Probe lf to the right.
                 if (lf == to) break;
-            while (arr[--rf] > pivot) //Probe rf to the left.
+            while (less(arr, --rf, pivot) //Probe rf to the left.
                 if (rf == from) break;
             
             if (rf < lf) break; //If the fingers cross, stop.
@@ -44,14 +44,19 @@ public class Quicksort <T extends Comparable <T>> {
     }
     
     /* Swap arr[a] and arr[b] */
-    private static void swap(T[] arr, int a, int b) {
+    private static <T extends Comparable <T>>void swap(T[] arr, int a, int b) {
         T temp = arr[a];
         arr[a] = arr[b];
         arr[b] = temp;
     }
     
+      private static <T extends Comparable <T>> boolean less(T a, T b){
+        return arr[a].compareTo(arr[b]) < 0;
+    }
+    
     public static void main(String[] args) {
-        int[] arr = {18, -19, 2, -6, -17, -3, 0, -4, 18, 8};
-        System.out.println(Arrays.toString(sort(arr)));
+        Integer[] arr = {18, -19, 2, -6, -17, -3, 0, -4, 18, 8};
+        sort(arr);
+        System.out.println(Arrays.toString(arr));
     }
 }

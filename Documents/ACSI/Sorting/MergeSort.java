@@ -1,13 +1,13 @@
 import java.util.Arrays;
 
 public class MergeSort <T extends Comparable <T>>{
-    public static T[] sort(T[] arr) {
-        T[] x = Arrays.copyOf(arr, arr.length);
-        sort(x, 0, x.length);
-        return x;
+    public static <T extends Comparable <T>> T[] sort(T[] arr) {
+        //T[] x = Arrays.copyOf(arr, arr.length);
+        sort(arr, 0, arr.length);
+        return arr;
     }
     
-    private static void sort(T[] arr, int from, int to) {
+    private static <T extends Comparable <T>>void sort(T[] arr, int from, int to) {
         if (to - from < 2) return;
         
         // Recursively sort the left and right halves of the array.
@@ -18,9 +18,12 @@ public class MergeSort <T extends Comparable <T>>{
         // Merge the two sorted halves.
         merge(arr, from, to, mid);
     }
+      private static <T extends Comparable <T>> boolean less(T[] arr, int a, int b){
+        return arr[a].compareTo(arr[b]) < 0;
+    }
     
-    private static void merge(T[] arr, int from, int to, int mid) {
-        T[] temp = new T[to - from];
+    private static <T extends Comparable <T>>void merge(T[] arr, int from, int to, int mid) {
+        T[] temp = (T[]) new Comparable [to - from];
         
         int leftFinger = from;
         int rightFinger = mid;
@@ -29,7 +32,7 @@ public class MergeSort <T extends Comparable <T>>{
         // Merge the left and right halves of the array into temp.
         int count = 0;
         while (leftFinger < mid && rightFinger < to) {
-            if (arr[leftFinger] < arr[rightFinger]) {
+            if (less(arr, leftFinger, rightFinger)) {
                 temp[count++] = arr[leftFinger++];
             } else {
                 temp[count++] = arr[rightFinger++];
@@ -53,7 +56,8 @@ public class MergeSort <T extends Comparable <T>>{
     }
     
     public static void main(String[] args) {
-        int[] arr = {18, -19, 2, -6, -17, -3, 0, -4, 18, 8};
-        System.out.println(Arrays.toString(sort(arr)));
+        Integer[] arr = {18, -19, 2, -6, -17, -3, 0, -4, 18, 8};
+        sort(arr);
+        System.out.println(Arrays.toString(arr));
     }
 }
