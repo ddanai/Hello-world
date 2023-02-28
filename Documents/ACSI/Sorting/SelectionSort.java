@@ -5,7 +5,7 @@ public class SelectionSort <T extends Comparable<T>> {
     /**
     * Sorts arr with out modifying the original.
     */
-    public static <T extends Comparable <T>>T[] sort(T[] arr) {
+    public static <T extends Comparable <T>> void sort(T[] arr) {
         
         //Copy values into a new array.
         /*T[] x = new T[arr.length];
@@ -17,15 +17,13 @@ public class SelectionSort <T extends Comparable<T>> {
         for (int i = 0; i < arr.length - 1; i++) {
             int smallest = i;
             for (int j = i + 1; j < arr.length; j++) {
-                if (less(j, smallest)){
+                if (less(arr, j, smallest)){
                     smallest = j;
                 }
             }
             
             swap(arr, i, smallest);
         }
-        
-        return arr;
     }
     
       private static <T extends Comparable <T>> boolean less(T[] arr, int a, int b){
@@ -40,7 +38,7 @@ public class SelectionSort <T extends Comparable<T>> {
     }
     
     /* Test client */
-    public static main(String[] args) {
+    public static void main(String[] args) {
         Integer[] arr = {18, -19, 2, -6, -17, -3, 0, -4, 18, 8};
         sort(arr);
         System.out.println(Arrays.toString(arr));

@@ -3,12 +3,12 @@ public class BubbleSort <T extends Comparable <T>> {
         /*T[] x = (T[])new Comparable[arr.length];
         for (int i = 0; i < arr.length; i++) {
             x[i] = arr[i];
-        */}
+        }*/
         
         for (int i = 0; i < arr.length; i++) {
             boolean swapMade = false;
             for (int j = 0; j < arr.length - 1 - i; j++) {
-                if less(arr, j, j+1) {
+                if (less(arr, j, j+1)) {
                     exch(arr, j, j + 1);
                     swapMade = true;
                 }
